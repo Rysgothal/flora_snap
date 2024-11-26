@@ -1,4 +1,4 @@
-import 'package:flora_snap/view/home_page.dart';
+import 'package:flora_snap/principal_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
@@ -31,7 +31,7 @@ class MainPage extends StatelessWidget {
             ),
           ),
           ),
-        body: const HomePage(), 
+        body: const PrincipalPage(), 
         ),
       );
   }

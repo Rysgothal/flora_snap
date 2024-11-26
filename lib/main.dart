@@ -1,4 +1,4 @@
-import 'package:flora_snap/view/main_page.dart';
+import 'package:flora_snap/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
