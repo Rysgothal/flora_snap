@@ -1,3 +1,4 @@
+import 'package:flora_snap/helpers/camera_acess.dart';
 import 'package:flutter/material.dart';
 
 class CameraPage extends StatelessWidget {
@@ -34,7 +35,7 @@ class CameraPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    print('Foi apertado para abrir a Câmera');
+                    takePicture();
                   },
                   child: const Text(
                     'Câmera',
