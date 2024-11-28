@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> sendImage(File imageFile) async {
-  final url = Uri.parse('http://192.168.15.4:5000/classify');
+  final url = Uri.parse('http://54.232.68.80:5000/classify');
   final request = http.MultipartRequest('POST', url)
     ..files.add(await http.MultipartFile.fromPath('file', imageFile.path))
     ..headers['Content-Type'] = 'multipart/form-data';
