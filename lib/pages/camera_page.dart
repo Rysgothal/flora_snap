@@ -68,6 +68,23 @@ class _CameraPageState extends State<CameraPage> {
                   ElevatedButton(onPressed: () async {
                     final body = await sendImage(_image!);
                     print(body);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Resultado'),
+                      content: Text('Classe: ${body['class']}\nConfiança: ${body['confidence']}'),
+                      actions: <Widget>[
+                      TextButton(
+                        child: const Text('OK'),
+                        onPressed: () {
+                        Navigator.of(context).pop();
+                        },
+                      ),
+                      ],
+                    );
+                    },
+                  );
                   }, 
                   child: const Text(
                     'Enviar', 
