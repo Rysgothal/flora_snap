@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flora_snap/helpers/camera_acess.dart';
 import 'package:flora_snap/helpers/send_image.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({super.key});
@@ -63,18 +62,33 @@ class _CameraPageState extends State<CameraPage> {
             if (_image != null)
             Padding(
               padding: const EdgeInsets.only(top: 10.0),
-              child: ElevatedButton(
-              onPressed: () {
-                // Implement your send image functionality here
-              },
-              child: const Row(
-                children:[
-                  ElevatedButton('Enviar', style: TextStyle(color: Colors.black)),
-                  ElevatedButton('Apagar', style: TextStyle(color: Colors.black)),
-                  ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(onPressed: () async {
+                    final body = await sendImage(_image!);
+                    print(body);
+                  }, 
+                  child: const Text(
+                    'Enviar', 
+                    style: TextStyle(
+                      color: Colors.black),
+                      ),
+                    ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                      _image = null;
+                      }
+                    );
+                  },
+                  child: const Text(
+                    'Apagar',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),],
                 ),
               ),
-            ),
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Row(

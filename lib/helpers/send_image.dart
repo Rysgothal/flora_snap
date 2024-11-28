@@ -1,19 +1,21 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future<void> sendImage(File imageFile) async {
-  final url = Uri.parse('http://127.0.0.1:5000/classify');
+Future<Map<String, dynamic>> sendImage(File imageFile) async {
+  final url = Uri.parse('http://192.168.15.4:5000/classify');
   final request = http.MultipartRequest('POST', url)
-    ..files.add(await http.MultipartFile.fromPath('image', imageFile.path));
+    ..files.add(await http.MultipartFile.fromPath('file', imageFile.path))
+    ..headers['Content-Type'] = 'multipart/form-data';
 
   final response = await request.send();
+  //final responseBody = response.body;
+  final responseBody = await response.stream.bytesToString();
 
   if (response.statusCode == 200) {
-    final responseBody = await response.stream.bytesToString();
-    final jsonResponse = jsonDecode(responseBody);
-    print('Response: $jsonResponse');
+    print(jsonDecode(responseBody));
+    return jsonDecode(responseBody);
   } else {
-    print('Failed to send image. Status code: ${response.statusCode}');
+    return {'error': 'Failed to send image'};
   }
 }
